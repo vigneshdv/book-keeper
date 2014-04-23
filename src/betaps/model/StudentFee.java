@@ -20,6 +20,7 @@ public class StudentFee {
     private String TransportFee;
     private String TotalFee;
     private String Date;
+    private String BillNo;
     private boolean[] Paid;
 
     public StudentFee() {
@@ -29,7 +30,7 @@ public class StudentFee {
             String StudentSection, String TuitionFee,
             String StationeryFee, String MaintenanceFee,
             String TransportFee, String TotalFee,
-            String Date, boolean[] Paid) {
+            String Date, String BillNo, boolean[] Paid) {
 
         this.StudentName = StudentName;
         this.StudentClass = StudentClass;
@@ -40,6 +41,7 @@ public class StudentFee {
         this.TransportFee = TransportFee;
         this.TotalFee = TotalFee;
         this.Date = Date;
+        this.BillNo = BillNo;
         this.Paid = Paid;
     }
 
@@ -107,12 +109,12 @@ public class StudentFee {
         this.TotalFee = TotalFee;
     }
 
-    public boolean[] getPaid() {
-        return Paid;
+    public boolean getPaid(int index) {
+        return Paid[index];
     }
 
-    public void setPaid(boolean[] Paid) {
-        this.Paid = Paid;
+    public void setPaid(int index, boolean value) {
+        this.Paid[index] = value;
     }
 
     public String getDate() {
@@ -123,4 +125,13 @@ public class StudentFee {
         this.Date = Date;
     }
 
+    public String getBillNo() {
+        return BillNo;
+    }
+
+    public void setBillNo(String BillNo) {
+        this.BillNo = BillNo;
+    }
+    
+    
 }

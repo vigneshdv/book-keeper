@@ -37,16 +37,76 @@ public class Utility {
     public static void writeInvoiceToFile() {
         try {
             Builder parse = new Builder(false);
-            File dataFile = new File("data" + File.pathSeparator + "Class_" + details.getStudentClass() + ".xml");
+            File dataFile = new File("data" + File.separator + "Class_" + details.getStudentClass() + ".xml");
             Document doc = parse.build(dataFile);
             
             Element root = doc.getRootElement();
-            
-            
-            
-            
-            
             System.out.println("Here: " + root.toXML());
+            
+            
+            Element bill = new Element("Bill");
+            Attribute billno = new Attribute("no", Utility.details.getBillNo());
+            bill.addAttribute(billno);
+            
+            Element date = new Element("Date");
+            date.appendChild(Utility.details.getDate());
+            
+            Element name = new Element("Name");
+            name.appendChild(Utility.details.getStudentName());
+            
+            Element std = new Element("Standard");
+            std.appendChild(Utility.details.getStudentClass());
+            
+            Element section = new Element("Section");
+            section.appendChild(Utility.details.getStudentSection());
+            
+            Element fees = new Element("Fees");
+            Element tuition = new Element("Tuition");
+            Element stationery = new Element("Stationery");
+            Element maintenance = new Element("Maintenance");
+            Element transport = new Element("Transport");
+            Element total = new Element("Total");
+            fees.appendChild(tuition);
+            fees.appendChild(stationery);
+            fees.appendChild(maintenance);
+            fees.appendChild(transport);
+            fees.appendChild(total);
+            
+            
+            Attribute paid = new Attribute("paid",""+Utility.details.getPaid(0));
+            tuition.addAttribute(paid);
+            tuition.appendChild(Utility.details.getTuitionFee());
+            
+            paid = new Attribute("paid",""+Utility.details.getPaid(1));
+            stationery.addAttribute(paid);
+            stationery.appendChild(Utility.details.getStationeryFee());
+            
+            paid = new Attribute("paid",""+Utility.details.getPaid(2));
+            maintenance.addAttribute(paid);
+            maintenance.appendChild(Utility.details.getMaintenanceFee());
+            
+            paid = new Attribute("paid",""+Utility.details.getPaid(3));
+            transport.addAttribute(paid);
+            transport.appendChild(Utility.details.getTransportFee());           
+            
+            total.appendChild(Utility.details.getTotalFee());
+            
+            bill.appendChild(date);
+            bill.appendChild(name);
+            bill.appendChild(std);
+            bill.appendChild(section);
+            bill.appendChild(fees);
+            
+            root.appendChild(bill);
+            
+            System.out.println("After adding new data:\n\n"+root.toXML());
+            
+            
+            
+            
+            
+            
+            
 
         } catch (Exception ex) {
             ex.printStackTrace();

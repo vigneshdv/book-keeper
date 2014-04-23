@@ -22,7 +22,7 @@ import nu.xom.Serializer;
 
 public class FeeFormGenPanel extends javax.swing.JPanel {
 
-    private int NoOfClasses = 9;
+    private int NoOfClasses = 14;
     private Pattern NumericPattern;
 
     public FeeFormGenPanel() {
@@ -34,7 +34,7 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
 
     public void createNewDataFiles() {
         try {
-            File dataFiles[] = new File[9];
+            File dataFiles[] = new File[14];
             String name = "data" + File.separator + "Class_";
 
             for (int i = 0; i < NoOfClasses; i++) {
@@ -125,7 +125,7 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
 
                 @Override
                 public boolean accept(File pathname) {
-                    String[] names = {"LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII"};
+                    String[] names = {"LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX","X","XI","XI"};
                     int flag = 0;
                     for (String name : names) {
                         if (pathname.getName().endsWith(name + ".xml")) {
@@ -139,7 +139,7 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
 
             System.out.println("Length: " + list.length);
 
-            if (list.length != 9) {
+            if (list.length != 14) {
 
                 String msg = "Student Database Files are missing. \nPress Yes if you are running this application for the first time. "
                         + "\nPress No if you wish to backup the data files from another location.";
@@ -211,13 +211,14 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
     public void saveDataToFile() {
         try {
             String name = this.StudentNameTF.getText();
-            String stdclass = this.SectionCB.getSelectedItem().toString();
-            String stdsec = this.StandardCB.getSelectedItem().toString();
+            String stdclass = this.StandardCB.getSelectedItem().toString();
+            String stdsec = this.SectionCB.getSelectedItem().toString();
             String tuition = this.TuitionFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.TuitionFeeTF.getText();
             String stationery = this.StationeryFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.StationeryFeeTF.getText();
             String maintenance = this.MaintenanceFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.MaintenanceFeeTF.getText();
             String transport = this.TransportFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.TransportFeeTF.getText();
             String total = this.TotalFeeTF.getText();
+            
             Date d = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             String date = sdf.format(d);
@@ -228,7 +229,10 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
             paid[2] = this.MaintenanceFeeTF.getText().equalsIgnoreCase("") ? false : true;
             paid[3] = this.TransportFeeTF.getText().equalsIgnoreCase("") ? false : true;
             
-            StudentFee details = new StudentFee(name, stdclass, stdsec, tuition, stationery, maintenance, transport, total, date, paid);
+            String billno = InvoiceNumberTF.getText();
+            
+            
+            StudentFee details = new StudentFee(name, stdclass, stdsec, tuition, stationery, maintenance, transport, total, date, billno, paid);
             Utility.details = details;
             SwingUtilities.invokeLater(new Runnable() {
 
