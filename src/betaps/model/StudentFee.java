@@ -9,7 +9,6 @@ package betaps.model;
  *
  * @author Vignesh
  */
-
 public class StudentFee {
 
     private String StudentName;
@@ -26,11 +25,12 @@ public class StudentFee {
     public StudentFee() {
     }
 
-    public StudentFee(String StudentName, String StudentClass, 
-                        String StudentSection, String TuitionFee, 
-                        String StationeryFee, String MaintenanceFee, 
-                        String TransportFee, String TotalFee, 
-                        String Date, boolean[] Paid) {
+    public StudentFee(String StudentName, String StudentClass,
+            String StudentSection, String TuitionFee,
+            String StationeryFee, String MaintenanceFee,
+            String TransportFee, String TotalFee,
+            String Date, boolean[] Paid) {
+
         this.StudentName = StudentName;
         this.StudentClass = StudentClass;
         this.StudentSection = StudentSection;
@@ -122,7 +122,5 @@ public class StudentFee {
     public void setDate(String Date) {
         this.Date = Date;
     }
-    
-    
 
 }
