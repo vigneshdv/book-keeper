@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Root/>
+<Root>
+    <Bill no="0004">
+        <Date>25-04-2014</Date>
+        <Name>Madhumitha HiFi</Name>
+        <Standard>LKG</Standard>
+        <Section>A</Section>
+        <Fees>
+            <Tuition paid="true">1400</Tuition>
+            <Stationery paid="true">1000</Stationery>
+            <Maintenance paid="true">500</Maintenance>
+            <Transport paid="true">1000</Transport>
+            <Total>3900.0</Total>
+        </Fees>
+    </Bill>
+</Root>

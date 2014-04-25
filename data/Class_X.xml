@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Root/>
+<Root>
+    <Bill no="0002">
+        <Date>25-04-2014</Date>
+        <Name>Vignesh AC</Name>
+        <Standard>X</Standard>
+        <Section>C</Section>
+        <Fees>
+            <Tuition paid="true">1300</Tuition>
+            <Stationery paid="true">4500</Stationery>
+            <Maintenance paid="true">1000</Maintenance>
+            <Transport paid="true">500</Transport>
+            <Total>7300.0</Total>
+        </Fees>
+    </Bill>
+</Root>

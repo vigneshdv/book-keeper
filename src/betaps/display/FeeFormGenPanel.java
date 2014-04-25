@@ -125,7 +125,7 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
 
                 @Override
                 public boolean accept(File pathname) {
-                    String[] names = {"LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX","X","XI","XI"};
+                    String[] names = {"LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XI"};
                     int flag = 0;
                     for (String name : names) {
                         if (pathname.getName().endsWith(name + ".xml")) {
@@ -213,25 +213,24 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
             String name = this.StudentNameTF.getText();
             String stdclass = this.StandardCB.getSelectedItem().toString();
             String stdsec = this.SectionCB.getSelectedItem().toString();
-            String tuition = this.TuitionFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.TuitionFeeTF.getText();
-            String stationery = this.StationeryFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.StationeryFeeTF.getText();
-            String maintenance = this.MaintenanceFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.MaintenanceFeeTF.getText();
-            String transport = this.TransportFeeTF.getText().equalsIgnoreCase("") ? "not paid" : this.TransportFeeTF.getText();
+            String tuition = this.TuitionFeeTF.getText().equalsIgnoreCase("") ? "0" : this.TuitionFeeTF.getText();
+            String stationery = this.StationeryFeeTF.getText().equalsIgnoreCase("") ? "0" : this.StationeryFeeTF.getText();
+            String maintenance = this.MaintenanceFeeTF.getText().equalsIgnoreCase("") ? "0" : this.MaintenanceFeeTF.getText();
+            String transport = this.TransportFeeTF.getText().equalsIgnoreCase("") ? "0" : this.TransportFeeTF.getText();
             String total = this.TotalFeeTF.getText();
-            
+
             Date d = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             String date = sdf.format(d);
-            
+
             boolean[] paid = new boolean[4];
             paid[0] = this.TuitionFeeTF.getText().equalsIgnoreCase("") ? false : true;
             paid[1] = this.StationeryFeeTF.getText().equalsIgnoreCase("") ? false : true;
             paid[2] = this.MaintenanceFeeTF.getText().equalsIgnoreCase("") ? false : true;
             paid[3] = this.TransportFeeTF.getText().equalsIgnoreCase("") ? false : true;
-            
+
             String billno = InvoiceNumberTF.getText();
-            
-            
+
             StudentFee details = new StudentFee(name, stdclass, stdsec, tuition, stationery, maintenance, transport, total, date, billno, paid);
             Utility.details = details;
             SwingUtilities.invokeLater(new Runnable() {
@@ -239,15 +238,36 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
                 @Override
                 public void run() {
                     Utility.writeInvoiceToFile();
+                    JOptionPane.showMessageDialog(null,"Bill saved successfully");
                 }
-            
-            
+
             });
             
-    
+            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void resetInvoiceForm() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Utility.readandsetInvoiceNumber();
+                setInvoiceNumberInDisplay(Utility.invoiceNumber);
+            }
+        });
+        
+        this.StudentNameTF.setText("");
+        this.StandardCB.setSelectedIndex(0);
+        this.SectionCB.setSelectedIndex(0);
+        this.TuitionFeeTF.setText("");
+        this.StationeryFeeTF.setText("");
+        this.MaintenanceFeeTF.setText("");
+        this.TransportFeeTF.setText("");
+        this.TotalFeeTF.setText("");
+        
     }
 
     /**
@@ -281,6 +301,8 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
         TotalFeeLabel = new javax.swing.JLabel();
         UpdateButton = new javax.swing.JButton();
         PrintButton = new javax.swing.JButton();
+        ResetButton = new javax.swing.JButton();
+        NewForm = new javax.swing.JButton();
 
         setAutoscrolls(true);
         setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -295,7 +317,7 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
         });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        StudentDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 62, 80)), "Student Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 2, 14), new java.awt.Color(113, 128, 135))); // NOI18N
+        StudentDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 62, 80)), "Student Details", 0, 0, new java.awt.Font("Calibri", 2, 14), new java.awt.Color(113, 128, 135))); // NOI18N
         StudentDetailsPanel.setPreferredSize(new java.awt.Dimension(700, 100));
         StudentDetailsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -357,7 +379,7 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
         InvoiceNumberTF.setPreferredSize(new java.awt.Dimension(200, 22));
         add(InvoiceNumberTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 60, -1));
 
-        FeeParticularsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 62, 80)), "Fee Particulars", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 2, 14), new java.awt.Color(113, 128, 135))); // NOI18N
+        FeeParticularsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 62, 80)), "Fee Particulars", 0, 0, new java.awt.Font("Calibri", 2, 14), new java.awt.Color(113, 128, 135))); // NOI18N
         FeeParticularsPanel.setMaximumSize(new java.awt.Dimension(700, 300));
         FeeParticularsPanel.setMinimumSize(new java.awt.Dimension(700, 300));
         FeeParticularsPanel.setPreferredSize(new java.awt.Dimension(700, 300));
@@ -469,12 +491,32 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
                 UpdateButtonActionPerformed(evt);
             }
         });
-        add(UpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 160, 40));
+        add(UpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, 160, 40));
 
         PrintButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         PrintButton.setForeground(new java.awt.Color(33, 36, 37));
         PrintButton.setText("Print Invoice");
-        add(PrintButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 160, 40));
+        add(PrintButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 160, 40));
+
+        ResetButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        ResetButton.setForeground(new java.awt.Color(33, 36, 37));
+        ResetButton.setText("Reset Form");
+        ResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetButtonActionPerformed(evt);
+            }
+        });
+        add(ResetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 480, 160, 40));
+
+        NewForm.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        NewForm.setForeground(new java.awt.Color(33, 36, 37));
+        NewForm.setText("New Form");
+        NewForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewFormActionPerformed(evt);
+            }
+        });
+        add(NewForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 160, 40));
 
         getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
@@ -517,13 +559,23 @@ public class FeeFormGenPanel extends javax.swing.JPanel {
         checkForDatabase();
     }//GEN-LAST:event_formComponentShown
 
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
+        resetInvoiceForm();
+    }//GEN-LAST:event_ResetButtonActionPerformed
+
+    private void NewFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFormActionPerformed
+        resetInvoiceForm();
+    }//GEN-LAST:event_NewFormActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FeeParticularsPanel;
     private javax.swing.JLabel InvoiceNumber;
     private javax.swing.JTextField InvoiceNumberTF;
     private javax.swing.JLabel MaintenanceFeeLabel;
     private javax.swing.JTextField MaintenanceFeeTF;
+    private javax.swing.JButton NewForm;
     private javax.swing.JButton PrintButton;
+    private javax.swing.JButton ResetButton;
     private javax.swing.JComboBox SectionCB;
     private javax.swing.JLabel SectionLabel;
     private javax.swing.JComboBox StandardCB;

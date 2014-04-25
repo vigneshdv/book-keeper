@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Settings>
     <Invoice>
-        <Last-Used-Serial>0</Last-Used-Serial>
+        <Last-Used-Serial>5</Last-Used-Serial>
     </Invoice>
     <Backup available="false"/>
 </Settings>

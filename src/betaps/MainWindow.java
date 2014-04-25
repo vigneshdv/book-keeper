@@ -53,10 +53,10 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     /*
-    *   checkSettingsStatus is run on the main GUI event thread simply because    
-    *   no GUI is loaded before it and therefore the user will not be aware of
-    *   the delay in running this method
-    */
+     *   checkSettingsStatus is run on the main GUI event thread simply because    
+     *   no GUI is loaded before it and therefore the user will not be aware of
+     *   the delay in running this method
+     */
     public void checkSettingsStatus() {
         try {
             File folder = new File("data");
@@ -154,8 +154,6 @@ public class MainWindow extends javax.swing.JFrame {
         FileMenu = new javax.swing.JMenu();
         File_PrintMenuItem = new javax.swing.JMenuItem();
         File_ExitMenuItem = new javax.swing.JMenuItem();
-        EditMenu = new javax.swing.JMenu();
-        SearchMenu = new javax.swing.JMenu();
         HelpMenu = new javax.swing.JMenu();
         Help_HelpMenuItem = new javax.swing.JMenuItem();
         Help_AboutMenuItem = new javax.swing.JMenuItem();
@@ -167,6 +165,7 @@ public class MainWindow extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         CardDeck.setLayout(new java.awt.CardLayout());
         getContentPane().add(CardDeck, java.awt.BorderLayout.CENTER);
@@ -190,17 +189,14 @@ public class MainWindow extends javax.swing.JFrame {
         File_ExitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         File_ExitMenuItem.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         File_ExitMenuItem.setText("Exit");
+        File_ExitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                File_ExitMenuItemActionPerformed(evt);
+            }
+        });
         FileMenu.add(File_ExitMenuItem);
 
         MenuBar.add(FileMenu);
-
-        EditMenu.setText("Edit");
-        EditMenu.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        MenuBar.add(EditMenu);
-
-        SearchMenu.setText("Search");
-        SearchMenu.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        MenuBar.add(SearchMenu);
 
         HelpMenu.setText("Help");
         HelpMenu.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
@@ -235,6 +231,10 @@ public class MainWindow extends javax.swing.JFrame {
         cl.show(CardDeck, "card1");
         this.repaint();
     }//GEN-LAST:event_File_PrintMenuItemActionPerformed
+
+    private void File_ExitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_File_ExitMenuItemActionPerformed
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }//GEN-LAST:event_File_ExitMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,7 +273,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardDeck;
-    private javax.swing.JMenu EditMenu;
     private javax.swing.JMenu FileMenu;
     private javax.swing.JMenuItem File_ExitMenuItem;
     private javax.swing.JMenuItem File_PrintMenuItem;
@@ -281,6 +280,5 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem Help_AboutMenuItem;
     private javax.swing.JMenuItem Help_HelpMenuItem;
     private javax.swing.JMenuBar MenuBar;
-    private javax.swing.JMenu SearchMenu;
     // End of variables declaration//GEN-END:variables
 }
